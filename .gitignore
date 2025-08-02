@@ -6,6 +6,7 @@ obj/
 node_modules/
 wwwroot/css/site.css
 App_Data/
+Properties/PublishProfiles/
 **/*.db-shm
 **/*.db-wal
 *.user
