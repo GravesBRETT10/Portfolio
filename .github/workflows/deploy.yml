@@ -1,0 +1,52 @@
+name: Deploy to Azure Web App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: brett-portfolio-web   # <-- your App Service name
+  PROJECT_FOLDER: .                         # <-- where BrettGravesPortfolio.csproj lives
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install NPM deps
+        working-directory: ${{ env.PROJECT_FOLDER }}
+        run: npm ci
+
+      - name: Build Tailwind
+        working-directory: ${{ env.PROJECT_FOLDER }}
+        run: npm run build
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish .NET
+        working-directory: ${{ env.PROJECT_FOLDER }}
+        run: dotnet publish -c Release -o publish
+
+      - name: Zip package
+        working-directory: ${{ env.PROJECT_FOLDER }}/publish
+        run: |
+          zip -r ../app.zip .
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          package: ${{ env.PROJECT_FOLDER }}/app.zip
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
