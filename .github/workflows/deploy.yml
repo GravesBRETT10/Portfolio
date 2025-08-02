@@ -1,4 +1,4 @@
-name: Deploy to Azure Web App
+name: Build & Deploy (Linux App Service)
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: brett-portfolio-web   # <-- your App Service name
-  PROJECT_FOLDER: .                         # <-- where BrettGravesPortfolio.csproj lives
+  PROJECT_FILE: BrettGravesPortfolio.csproj     # your .csproj is in repo root
+  PUBLISH_DIR: ${{ github.workspace }}/publish  # output directory
 
 jobs:
   build-and-deploy:
@@ -17,36 +17,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup Node (for Tailwind)
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install NPM deps
-        working-directory: ${{ env.PROJECT_FOLDER }}
+      - name: Install npm deps
         run: npm ci
 
-      - name: Build Tailwind
-        working-directory: ${{ env.PROJECT_FOLDER }}
-        run: npm run build
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i ./Styles/input.css -o ./wwwroot/css/site.css --minify
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore $PROJECT_FILE
 
-      - name: Publish .NET
-        working-directory: ${{ env.PROJECT_FOLDER }}
-        run: dotnet publish -c Release -o publish
+      - name: Build
+        run: dotnet build $PROJECT_FILE -c Release --no-restore
 
-      - name: Zip package
-        working-directory: ${{ env.PROJECT_FOLDER }}/publish
-        run: |
-          zip -r ../app.zip .
+      - name: Publish
+        run: dotnet publish $PROJECT_FILE -c Release -o "$PUBLISH_DIR" --no-build
 
-      - name: Deploy to Azure Web App
+      # Deploy to your existing Linux App Service
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          package: ${{ env.PROJECT_FOLDER }}/app.zip
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          app-name: brett-portfolio-web
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.PUBLISH_DIR }}
