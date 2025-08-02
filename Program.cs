@@ -1,4 +1,4 @@
-using BrettGravesPortfolio.Services;
+﻿using BrettGravesPortfolio.Services;
 using BrettGravesPortfolio.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,25 +18,28 @@ if (!string.IsNullOrWhiteSpace(builder.Configuration["SENDGRID_API_KEY"]))
 else
     builder.Services.AddSingleton<IEmailSender, FileEmailSender>();
 
-//builder.Services.AddHostedService<ResumeIngestionHostedService>();
-if (builder.Environment.IsDevelopment())
+// ✅ Only run résumé ingestion when not disabled.
+// In Azure set DISABLE_RAG_INGEST=1 so it does NOT re-ingest on every deploy/start.
+// Locally you can leave it unset so it runs once when you need it.
+if (builder.Configuration["DISABLE_RAG_INGEST"] != "1")
 {
     builder.Services.AddHostedService<ResumeIngestionHostedService>();
 }
 
 var app = builder.Build();
 
+// In production: error page + HSTS + HTTPS redirection
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-    app.UseHttpsRedirection();   // force HTTPS only in prod
+    app.UseHttpsRedirection();
 }
 
 app.UseStaticFiles();
 app.UseRouting();
 
-// sample endpoint
+// sample endpoint (optional)
 app.MapGet("/api/github", async (HttpClient http, string user) =>
 {
     var req = new HttpRequestMessage(HttpMethod.Get, $"https://api.github.com/users/{user}/repos");
@@ -46,7 +49,7 @@ app.MapGet("/api/github", async (HttpClient http, string user) =>
     return Results.Content(json, "application/json");
 });
 
-// enable attribute-routed controllers (e.g., /api/chat, /Contact)
+// attribute-routed controllers (e.g., /api/chat, /Contact)
 app.MapControllers();
 
 // MVC conventional routing
