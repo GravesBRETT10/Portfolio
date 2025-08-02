@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Brett\\source\\repos\\BrettGravesPortfolio\\BrettGravesPortfolio\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Brett\\source\\repos\\BrettGravesPortfolio\\BrettGravesPortfolio\\wwwroot\\files\\BrettGraves.pdf",
+      "PackagePath": "staticwebassets\\files\\BrettGraves.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Brett\\source\\repos\\BrettGravesPortfolio\\BrettGravesPortfolio\\wwwroot\\files\\CoverLetter.pdf",
+      "PackagePath": "staticwebassets\\files\\CoverLetter.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Brett\\source\\repos\\BrettGravesPortfolio\\BrettGravesPortfolio\\wwwroot\\img\\BRETT-GRAVES.jpeg",
+      "PackagePath": "staticwebassets\\img\\BRETT-GRAVES.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Brett\\source\\repos\\BrettGravesPortfolio\\BrettGravesPortfolio\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BrettGravesPortfolio.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.BrettGravesPortfolio.props",
+      "PackagePath": "build\\BrettGravesPortfolio.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.BrettGravesPortfolio.props",
+      "PackagePath": "buildMultiTargeting\\BrettGravesPortfolio.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.BrettGravesPortfolio.props",
+      "PackagePath": "buildTransitive\\BrettGravesPortfolio.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

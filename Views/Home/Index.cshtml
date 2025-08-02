@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Home — Brett Graves";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="grid md:grid-cols-2 gap-8 items-start">
+    <!-- Left: About -->
+    <div>
+        <!-- Avatar -->
+        <div class="mb-3">
+            <img src="~/img/brett-graves.jpeg"
+                 asp-append-version="true"
+                 alt="Brett Graves"
+                 class="h-12 w-12 rounded-full object-cover ring-2 ring-white/10 shadow-md" />
+        </div>
+
+        <h1 class="text-4xl font-extrabold tracking-tight">Hi, I'm Brett 👋</h1>
+        <hr class="my-4 border-white/10" />
+
+        <h3 class="text-xl font-semibold tracking-tight">About Me</h3>
+        <br />
+        <p class="text-slate-300 leading-relaxed max-w-3xl">
+            I’m a software engineer with a .NET/Azure focus who blends engineering discipline with curiosity.
+            My background spans project management, advanced math/logic, and full-stack development.
+            I use modern cloud practices and AI tooling to ship reliable systems, reduce toil, and move delivery faster.
+        </p>
+
+        <p class="text-slate-300 leading-relaxed max-w-3xl mt-4">
+            Recent work includes SQL performance tuning and automation at scale, Azure infrastructure and DevOps pipelines,
+            building containerized frontend features, and integrating assistants like Copilot and OpenAI to supercharge developer workflows.
+            I care about clean design, measurable uptime, and pragmatic automation that saves teams time.
+        </p>
+
+        <p class="text-slate-300 leading-relaxed max-w-3xl mt-4">
+            I hold a B.S. in Computer Science from the University of Wisconsin–Whitewater.
+            If you’re looking for someone who can own services end-to-end API design, data pipelines, cloud deployment,
+            and automation.
+        </p>
+
+        <div class="mt-6 flex gap-3">
+            <a class="btn-primary" asp-controller="Home" asp-action="Projects">See Projects</a>
+            <a class="btn-secondary" asp-controller="Home" asp-action="ApiPlayground">API Playground</a>
+        </div>
+    </div>
+
+    <!-- Right: stacked cards -->
+    <div class="mt-6 grid gap-6 content-start">
+        <!-- Skills -->
+        <div class="max-w-sm rounded-2xl bg-slate-800 hover:bg-sky-700 p-6 ring-1 ring-slate-600/50 shadow-xl">
+            <h3 class="text-xl font-semibold mb-2">Skills</h3>
+            <ul class="list-disc list-outside pl-6 text-sm text-slate-200 space-y-2">
+                <li>.NET, C#, ASP.NET MVC, Web APIs, &amp; React Native</li>
+                <li>Azure Cloud Services (App Services, Storage, Frontdoor, Identity, Monitoring)</li>
+                <li>DevOps &amp; CI/CD Pipelines (Azure DevOps, GitHub)</li>
+                <li>SQL, T-SQL, Stored Procedures, Postgres</li>
+                <li>OpenAI, RAG, developer productivity</li>
+                <li>SQL Development, Automation &amp; Performance Tuning</li>
+                <li>AI-Integrated Development (Copilot, OpenAI, Automation)</li>
+                <li>Power Automate &amp; UiPath Workflow Automation</li>
+                <li>Cloud Infrastructure Monitoring &amp; Optimization</li>
+                <li>Agile Project Coordination &amp; Cross-Team Collaboration</li>
+            </ul>
+        </div>
+
+        <!-- Impact -->
+        <div class="max-w-sm rounded-2xl bg-slate-800 hover:bg-sky-700 p-6 ring-1 ring-slate-600/50 shadow-xl">
+            <h3 class="text-xl font-semibold mb-2">Impact</h3>
+            <ul class="list-disc list-outside pl-6 text-sm text-slate-200 space-y-2">
+                <li>Automated status checks and telemetry alerts → faster response</li>
+                <li>Improved deployment reliability and observability</li>
+                <li>Introduced AI tooling to speed up development &amp; documentation</li>
+            </ul>
+        </div>
+    </div>
+</section>

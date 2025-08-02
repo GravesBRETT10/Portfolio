@@ -1,0 +1,13 @@
+
+bin/
+obj/
+.vs/
+.vscode/
+node_modules/
+wwwroot/css/site.css
+App_Data/
+**/*.db-shm
+**/*.db-wal
+*.user
+*.suo
+*.swp

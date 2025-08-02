@@ -1,0 +1,55 @@
+@model BrettGravesPortfolio.Models.ContactForm
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-3xl font-bold mb-4">Contact</h1>
+<p class="text-slate-300 mb-2">
+    Email: <a class="underline" href="mailto:GravesBR10@gmail.com">GravesBR10@gmail.com</a>
+</p>
+<p class="text-slate-300 mb-6">
+    LinkedIn: <a class="underline" href="https://www.linkedin.com/in/brettgraves6964/" target="_blank">linkedin.com/in/brettgraves6964</a>
+</p>
+
+<form asp-controller="Contact" asp-action="Index" method="post" class="grid gap-4 max-w-lg">
+    @Html.AntiForgeryToken()
+
+    @* Honeypot (should remain empty for humans) *@
+    <div class="hidden">
+        <label for="Website">Leave blank</label>
+        <input asp-for="Website" autocomplete="off" />
+    </div>
+
+    <div>
+        <label asp-for="Name" class="label"></label>
+        <input asp-for="Name" class="input w-full" placeholder="Your name" />
+        <span asp-validation-for="Name" class="text-red-400 text-xs"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email" class="label"></label>
+        <input asp-for="Email" class="input w-full" placeholder="you@email.com" />
+        <span asp-validation-for="Email" class="text-red-400 text-xs"></span>
+    </div>
+
+    <div>
+        <label asp-for="Subject" class="label"></label>
+        <input asp-for="Subject" class="input w-full" placeholder="Subject" />
+        <span asp-validation-for="Subject" class="text-red-400 text-xs"></span>
+    </div>
+
+    <div>
+        <label asp-for="Message" class="label"></label>
+        <textarea asp-for="Message" rows="6" class="input w-full" placeholder="Your message"></textarea>
+        <span asp-validation-for="Message" class="text-red-400 text-xs"></span>
+    </div>
+
+    <div asp-validation-summary="All" class="text-red-400 text-sm"></div>
+
+    <button class="btn-primary">Send</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

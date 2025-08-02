@@ -1,0 +1,51 @@
+
+@{
+    ViewData["Title"] = "API Playground";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-3xl font-bold mb-6">API Playground</h1>
+<div class="grid md:grid-cols-2 gap-6">
+    <section class="card hover:bg-sky-700">
+        <h3 class="card-title">GitHub Repos (public)</h3>
+        <div class="flex gap-2">
+            <input id="ghUser" class="input" value="dotnet" placeholder="GitHub username (e.g., dotnet)" />
+            <button class="btn-primary" onclick="loadGithub()">Fetch</button>
+        </div>
+        <div id="ghError" class="text-red-400 text-sm mt-2 hidden"></div>
+        <pre id="ghData" class="rounded-xl bg-slate-900 border border-white/10 p-3 text-xs overflow-x-auto mt-2"></pre>
+    </section>
+    <section class="card hover:bg-sky-700">
+        <h3 class="card-title">POST /api/echo</h3>
+        <textarea id="echoBody" class="input h-32">{ "hello":"world" }</textarea>
+        <div class="mt-2 flex gap-2">
+            <button class="btn-secondary" onclick="postEcho()">Send</button>
+            <button class="btn" onclick="document.getElementById('echoBody').value='{ \"hello\":\"world\" }'">Sample</button>
+        </div>
+        <pre id="echoResp" class="rounded-xl bg-slate-900 border border-white/10 p-3 text-xs overflow-x-auto mt-2"></pre>
+    </section>
+</div>
+@section Scripts {
+<script>
+async function loadGithub() {
+    const user = document.getElementById('ghUser').value.trim();
+    const err = document.getElementById('ghError');
+    const out = document.getElementById('ghData');
+    err.classList.add('hidden'); out.textContent = '';
+    try {
+        const resp = await fetch(`/api/github?user=${encodeURIComponent(user)}`);
+        const json = await resp.json();
+        out.textContent = JSON.stringify(json, null, 2);
+        if (!resp.ok) { err.textContent = 'Error ' + resp.status; err.classList.remove('hidden'); }
+    } catch (e) { err.textContent = e; err.classList.remove('hidden'); }
+}
+async function postEcho() {
+    const body = document.getElementById('echoBody').value;
+    const out = document.getElementById('echoResp');
+    try {
+        const resp = await fetch('/api/echo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+        const json = await resp.json();
+        out.textContent = JSON.stringify(json, null, 2);
+    } catch (e) { out.textContent = JSON.stringify({ error: String(e) }, null, 2); }
+}
+</script>
+}

@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Projects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-3xl font-bold mb-6">Projects</h1>
+
+<div class="grid md:grid-cols-2 gap-6">
+    <!-- Existing: Replication watchdog -->
+    <article class="card hover:bg-sky-700">
+        <h3 class="card-title">Data Replication Automation &amp; Monitoring</h3>
+        <p class="mt-2 text-slate-300">
+            Designed an automated watchdog for telematics replication that
+            <strong>increased replication uptime by ~40%</strong> and eliminated weekly outages.
+        </p>
+        <ul class="mt-3 list-disc list-outside pl-6 text-sm text-slate-300 space-y-1 marker:text-indigo-400">
+            <li>Power Automate + SQL procs to validate counts/deltas and integrity between source and target.</li>
+            <li>Daily status emails with anomaly detection and drill-down links.</li>
+            <li>UiPath UI checks to verify data presence end-to-end.</li>
+        </ul>
+        <div class="badge-row">
+            <span class="badge">Power Automate</span><span class="badge">UiPath</span>
+            <span class="badge">Azure</span><span class="badge">SQL</span>
+            <span class="badge">Project Management</span><span class="badge">Stored Procs</span>
+        </div>
+    </article>
+
+    <!-- Existing: Health/status page -->
+    <article class="card hover:bg-sky-700">
+        <h3 class="card-title">Service Health &amp; Deployment Status Page</h3>
+        <p class="mt-2 text-slate-300">
+            Built a .NET C# site that aggregates API/DB health and lets business teams post deployment windows and notices.
+        </p>
+        <ul class="mt-3 list-disc list-outside pl-6 text-sm text-slate-300 space-y-1 marker:text-indigo-400">
+            <li>Health checks calling internal APIs and DB endpoints; single pane of glass for availability.</li>
+            <li>Admin tools for planned maintenance/deployments.</li>
+            <li>CI/CD with Azure DevOps/GitHub; Azure App Service; secrets in Key Vault.</li>
+        </ul>
+        <div class="badge-row">
+            <span class="badge">ASP.NET MVC</span><span class="badge">App Service</span>
+            <span class="badge">DevOps/GitHub</span><span class="badge">Key Vault</span>
+            <span class="badge">C#</span><span class="badge">APIs</span>
+        </div>
+    </article>
+
+    <!-- NEW: Contract-first Orders API -->
+    <article class="card hover:bg-sky-700">
+        <h3 class="card-title">Well-Architected Review &amp; Reliability Uplift</h3>
+        <p class="mt-2 text-slate-300">
+            Led a Reliability-pillar assessment across core apps. Partnered with business owners to capture
+            requirements and convert them into a practical action plan that improved availability and reduced
+            unplanned downtime.
+        </p>
+        <ul class="mt-3 list-disc list-outside pl-6 text-sm text-slate-300 space-y-1 marker:text-indigo-400">
+            <li>
+                Workshops with stakeholders to define critical user journeys, RTO/RPO targets, and
+                availability goals; translated into <strong>SLOs/SLIs</strong> and an error-budget policy.
+            </li>
+            <li>
+                Azure hardening: moved workloads to <strong>zone-redundant</strong> SKUs (App Service / data tier where applicable),
+                added health probes, autoscale, and safe rollout rings.
+            </li>
+            <li>Data durability: enabled <strong>Blob Versioning</strong> + soft delete + lifecycle rules; verified recovery via scripted drills.</li>
+            <li>Resilience patterns: idempotent operations, retry with jitter, and queueing for long-running work.</li>
+            <li>Observability: synthetic availability tests, targeted alerts, and dashboards for SLO tracking in App Insights.</li>
+            <li>Prepared DR runbooks and executed tabletop/chaos drills to validate failover paths.</li>
+        </ul>
+        <div class="badge-row">
+            <span class="badge">Azure WAF</span><span class="badge">Reliability</span>
+            <span class="badge">Zone Redundancy</span><span class="badge">Blob Versioning</span>
+            <span class="badge">SLO/SLI</span><span class="badge">App Insights</span>
+        </div>
+    </article>
+
+    <!-- NEW: Incident telemetry ETL -->
+    <article class="card hover:bg-sky-700">
+        <h3 class="card-title">Incident Telemetry ETL &amp; Ops Dashboard</h3>
+        <p class="mt-2 text-slate-300">
+            Nightly ETL turned raw logs into a clean facts table that exposed noisy endpoints and sped root-cause analysis.
+        </p>
+        <ul class="mt-3 list-disc list-outside pl-6 text-sm text-slate-300 space-y-1 marker:text-indigo-400">
+            <li>KQL pre-aggregation → SQL staging → dimensional model; incremental loads with watermarks.</li>
+            <li>Power BI dashboard: error-rate by route, cold-start hotspots, SLI/SLO trends.</li>
+            <li>Automated alerts when thresholds/regressions breached week-over-week.</li>
+        </ul>
+        <div class="badge-row">
+            <span class="badge">KQL</span><span class="badge">SQL</span>
+            <span class="badge">ETL</span><span class="badge">Power BI</span>
+            <span class="badge">Observability</span>
+        </div>
+    </article>
+</div>

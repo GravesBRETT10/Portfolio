@@ -1,0 +1,73 @@
+
+@{
+    Layout = null;
+    var title = ViewData["Title"] as string ?? "Brett Graves — Portfolio";
+}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="bg-slate-950 text-slate-100">
+    @{
+        var currentController = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "").ToLowerInvariant();
+        var currentAction = (ViewContext.RouteData.Values["action"]?.ToString() ?? "").ToLowerInvariant();
+
+        Func<string, string, string> navClass = (ctrl, act) =>
+        {
+            bool isActive = currentController == ctrl.ToLowerInvariant()
+        && (string.IsNullOrEmpty(act) || currentAction == act.ToLowerInvariant());
+            // base Tailwind for links + active state
+            return isActive
+        ? "nav bg-slate-800/60 text-white"
+        : "nav hover:bg-slate-800/40";
+        };
+    }
+    <header class="backdrop-blur bg-slate-900/60 border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-6">
+            <a asp-controller="Home" asp-action="Index" class="text-xl font-bold tracking-tight">Brett Graves</a>
+            <nav class="flex flex-wrap gap-3 text-sm">
+                <a class="@navClass("Home","Index")" href="@Url.Action("Index","Home")">Home</a>
+                <a class="@navClass("Home","Projects")" href="@Url.Action("Projects","Home")">Projects</a>
+                <a class="@navClass("Home","ApiPlayground")" href="@Url.Action("ApiPlayground","Home")">API Playground</a>
+                <a class="@navClass("Home","AzureDevOps")" href="@Url.Action("AzureDevOps","Home")">Azure &amp; DevOps</a>
+                <a class="@navClass("Home","AIAutomation")" href="@Url.Action("AIAutomation","Home")">AI &amp; Automation</a>
+                <a class="@navClass("Home","SqlData")" href="@Url.Action("SqlData","Home")">SQL &amp; Data</a>
+                <a class="@navClass("Home","Resume")" href="@Url.Action("Resume","Home")">Resume</a>
+                <a class="@navClass("Home","CoverLetter")" href="@Url.Action("CoverLetter","Home")">Cover Letter</a>
+                <a class="@navClass("Contact","Index")" asp-controller="Contact" asp-action="Index">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1">
+        <div class="max-w-6xl mx-auto px-4 py-10">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-8 text-sm text-slate-400">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; @DateTime.UtcNow.Year Brett Graves • <a class="underline" href="https://www.linkedin.com/in/brettgraves6964/" target="_blank">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-50">
+        <button class="rounded-full px-5 py-3 bg-indigo-600 hover:bg-indigo-500 shadow-lg" onclick="toggleChat()">Chat with Brett</button>
+        <div id="chat-panel" class="hidden mt-3 w-96 max-w-[92vw] rounded-2xl bg-slate-900 border border-white/10 shadow-xl p-4">
+            <div id="chat-messages" class="h-64 overflow-y-auto space-y-3 pr-1"></div>
+            <div class="mt-3 flex gap-2">
+                <input id="chat-input" class="input flex-1" placeholder="Ask about Brett's skills, Azure, SQL..." />
+                <button class="btn-primary" onclick="sendChat()">Send</button>
+            </div>
+            <p id="chat-error" class="text-red-400 text-xs mt-2 hidden"></p>
+        </div>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
