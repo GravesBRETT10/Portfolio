@@ -1,6 +1,6 @@
 
 # Brett Graves — ASP.NET Core MVC Portfolio (.NET 8)
-Full portfolio with Tailwind styling, API Playground, and a résumé-aware RAG chatbot.
+Full portfolio with Tailwind styling, API Playground, and a Resume-aware RAG chatbot.
 
 ## Run in Visual Studio 2022
 1. Open the solution `BrettGravesPortfolio.sln`.
@@ -29,9 +29,9 @@ Full portfolio with Tailwind styling, API Playground, and a résumé-aware RAG c
 6. Press **F5** to run.
 
 ## Pages
-- Home, Projects, Skills & Impact, API Playground, Azure & DevOps, AI & Automation, SQL & Data, Résumé, Cover Letter, Chat with Brett, Contact
+- Home, Projects, Skills & Impact, API Playground, Azure & DevOps, AI & Automation, SQL & Data, Resume, Cover Letter, Chat with Brett, Contact
 
 ## API Endpoints
 - `POST /api/echo` — echoes JSON.
 - `GET /api/github?user=<username>` — server-side proxy for GitHub public repos (used by Playground).
-- `POST /api/chat` — résumé-aware chat (RAG).
+- `POST /api/chat` — Resume-aware chat (RAG).

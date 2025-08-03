@@ -22,7 +22,7 @@ public class ResumeRagService : IResumeRagService
         var contexts = await _store.SearchAsync(question, topK: 6, ct);
         if (contexts.Count == 0)
         {
-            return "I don't have résumé context loaded yet. Please try again after the initial ingestion finishes.";
+            return "I don't have Resume context loaded yet. Please try again after the initial ingestion finishes.";
         }
         var system = "You are Brett's portfolio assistant. Answer the question using the provided context only. If something is unclear, say you don't know and suggest contacting Brett. Keep answers concise and specific, professional but friendly.";
         var joined = string.Join("\n---\n", contexts);

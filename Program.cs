@@ -18,7 +18,7 @@ if (!string.IsNullOrWhiteSpace(builder.Configuration["SENDGRID_API_KEY"]))
 else
     builder.Services.AddSingleton<IEmailSender, FileEmailSender>();
 
-// ✅ Only run résumé ingestion when not disabled.
+// ✅ Only run Resume ingestion when not disabled.
 // In Azure set DISABLE_RAG_INGEST=1 so it does NOT re-ingest on every deploy/start.
 // Locally you can leave it unset so it runs once when you need it.
 if (builder.Configuration["DISABLE_RAG_INGEST"] != "1")

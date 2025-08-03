@@ -1,10 +1,16 @@
-
 @{
     ViewData["Title"] = "Cover Letter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1 class="text-3xl font-bold mb-4">Cover Letter</h1>
+
 <div class="mb-4">
-    <a class="btn-secondary" href="~/files/CoverLetter.pdf" target="_blank">Download PDF</a>
+    <a class="btn-primary" href="~/files/CoverLetter.pdf" target="_blank" rel="noopener">Download PDF</a>
 </div>
-<iframe class="w-full h-[80vh] rounded-xl border border-white/10" src="~/files/CoverLetter.pdf"></iframe>
+
+<div class="rounded-2xl border border-white/10 overflow-hidden">
+    <iframe class="w-full h-[65vh] sm:h-[75vh] md:h-[82vh] block"
+            src="~/files/CoverLetter.pdf"
+            title="Brett Graves — Cover Letter"
+            loading="lazy"></iframe>
+</div>

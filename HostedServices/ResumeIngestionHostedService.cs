@@ -53,7 +53,7 @@ public class ResumeIngestionHostedService : IHostedService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to ingest résumé/cover letter context");
+            _logger.LogError(ex, "Failed to ingest Resume/cover letter context");
         }
     }
 

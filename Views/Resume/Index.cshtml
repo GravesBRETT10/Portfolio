@@ -1,11 +1,157 @@
-
 @{
     ViewData["Title"] = "Resume";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="text-3xl font-bold mb-4">RÃ©sumÃ©</h1>
-<p class="text-slate-400 mb-4">Best on desktop; download for full fidelity.</p>
+<h1 class="text-3xl font-bold mb-4">Resume</h1>
+
+<!-- Download first for small screens -->
 <div class="mb-4">
-    <a class="btn-secondary" href="~/files/BrettGraves.pdf" target="_blank">Download PDF</a>
+    <a class="btn-primary" href="~/files/BrettGraves.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
 </div>
-<iframe class="w-full h-[80vh] rounded-xl border border-white/10" src="~/files/BrettGraves.pdf"></iframe>
+
+@* <!-- Responsive PDF embed: tall on desktop, shorter on phones -->
+<div class="rounded-xl border border-white/10 overflow-hidden">
+    <iframe class="w-full h-[65vh] sm:h-[75vh] md:h-[82vh] block"
+            src="~/files/BrettGraves.pdf"
+            title="Brett Graves Resume"
+            loading="lazy"></iframe>
+</div> *@
+
+<!-- --- OPTIONAL CODED VERSION (no PDF embed) ----------------------- -->
+<!-- If you prefer a fully coded Resume section, keep this below. You can
+     remove the iframe block above later and just leave this section. -->
+<section class="mt-10 space-y-8">
+    <!-- Header / contact -->
+    <header class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h2 class="text-2xl font-semibold">Brett Graves</h2>
+        <p class="text-slate-300 mt-1">
+            Menomonee Falls, WI • 262-844-6964 • <a class="underline" href="mailto:GravesBR10@gmail.com">GravesBR10@gmail.com</a>
+        </p>
+        <div class="flex flex-wrap gap-3 mt-3 text-sm">
+            <a class="badge" href="https://www.linkedin.com/in/brettgraves6964/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="badge" href="https://learn.microsoft.com/en-us/users/gravesbrett-8490/transcript/de5pmarmyj2459l" target="_blank" rel="noopener">Microsoft Learn Transcript</a>
+            <a class="badge" href="/" rel="noopener">Portfolio</a>
+        </div>
+        <p class="text-slate-400 text-sm mt-3">References available upon request.</p>
+    </header>
+
+    <!-- Summary -->
+    <article class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h3 class="text-xl font-semibold">Professional Summary</h3>
+        <p class="text-slate-300 mt-2 leading-relaxed">
+            Inquisitive Computer Science professional skilled in project management, advanced math/logic, and coding. Focused on leveraging
+            AI and modern engineering to build reliable systems, streamline operations, and drive practical innovation; seeking a Software
+            Developer or Solutions role. <span class="sr-only">Resume source on file.</span>
+        </p>
+    </article>
+
+    <!-- Skills -->
+    <article class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h3 class="text-xl font-semibold">Skills</h3>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-3 text-slate-300">
+            <ul class="space-y-2 list-disc list-inside">
+                <li>SQL Automation &amp; Optimization</li>
+                <li>AI-Driven Development Processes</li>
+                <li>Identity &amp; Access Management</li>
+            </ul>
+            <ul class="space-y-2 list-disc list-inside">
+                <li>Azure Cloud Infrastructure</li>
+                <li>DevOps &amp; CI/CD Integration</li>
+                <li>Compliance &amp; Record Keeping</li>
+            </ul>
+            <ul class="space-y-2 list-disc list-inside">
+                <li>Project Management</li>
+                <li>Oral &amp; Written Communication</li>
+                <li>Microsoft 365 Tools</li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- Languages & Frameworks -->
+    <article class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h3 class="text-xl font-semibold">Languages &amp; Frameworks</h3>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-3 text-slate-300">
+            <ul class="space-y-2 list-disc list-inside">
+                <li>C#, Java, JavaScript, PHP</li>
+                <li>HTML, CSS, Python, SQL</li>
+                <li>Unix/Bash/Shell</li>
+            </ul>
+            <ul class="space-y-2 list-disc list-inside">
+                <li>.NET (C#)</li>
+                <li>React (JS)</li>
+                <li>Laravel (PHP)</li>
+            </ul>
+            <ul class="space-y-2 list-disc list-inside">
+                <li>Django (Python)</li>
+                <li>Low/No-code: Palantir, Crowdbotics</li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- Experience -->
+    <article class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h3 class="text-xl font-semibold">Professional Experience</h3>
+
+        <div class="mt-4 space-y-6 text-slate-300">
+            <section>
+                <header class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h4 class="font-semibold">eBusiness Solutions Associate (Promotion) — Komatsu</h4>
+                    <span class="text-slate-400 text-sm">Oct 2022 – Present • Milwaukee, WI</span>
+                </header>
+                <p class="text-slate-400 text-sm">Smart Construction &amp; E-Commerce</p>
+                <ul class="mt-2 list-disc list-outside pl-6 space-y-1">
+                    <li>SQL database work: monitoring, automation, stored procedures for performance.</li>
+                    <li>Built React container-app features alongside backend services.</li>
+                    <li>Owned Azure Cloud infrastructure for apps; monitoring &amp; optimization.</li>
+                    <li>Maintained Azure DevOps; improved CI/CD &amp; team workflow.</li>
+                    <li>Automated monitoring with UiPath, SQL, and Power Automate; status page improved app reliability by ~50%.</li>
+                    <li>Used SonarQube for QA; GitHub/Azure DevOps for version control &amp; pipelines.</li>
+                    <li>Worked with application APIs/servers (My Komatsu); integrated Copilot/OpenAI.</li>
+                    <li>Supported Microsoft Entra SSO processes; cross-functional collaboration.</li>
+                </ul>
+            </section>
+
+            <section>
+                <header class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h4 class="font-semibold">ASK Ticket Specialist L2 — Komatsu</h4>
+                    <span class="text-slate-400 text-sm">Jul 2022 – Oct 2022 • Milwaukee, WI</span>
+                </header>
+                <p class="text-slate-400 text-sm">Smart Construction &amp; E-Commerce</p>
+                <ul class="mt-2 list-disc list-outside pl-6 space-y-1">
+                    <li>Designed SQL monitoring &amp; automation to improve reliability.</li>
+                    <li>Handled customer service requests for user/database/telemetry issues.</li>
+                    <li>Managed Azure infrastructure; built DevOps environment.</li>
+                    <li>Created a status page and UiPath automations for performance tracking.</li>
+                    <li>Introduced Copilot/OpenAI to daily workflows.</li>
+                </ul>
+            </section>
+
+            <section>
+                <header class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h4 class="font-semibold">Digital Media Specialist — One Touch Point</h4>
+                    <span class="text-slate-400 text-sm">Mar 2021 – Jul 2022 • Hartland, WI</span>
+                </header>
+                <ul class="mt-2 list-disc list-outside pl-6 space-y-1">
+                    <li>Collaborated on app development and maintained client sites.</li>
+                    <li>Translated customization requests into on-brand designs.</li>
+                    <li>Managed client communications and schedules; validated software via Linux.</li>
+                    <li>Produced layouts with Adobe tools.</li>
+                </ul>
+            </section>
+        </div>
+    </article>
+
+    <!-- Education & Volunteering -->
+    <article class="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
+        <h3 class="text-xl font-semibold">Education &amp; Affiliations</h3>
+        <ul class="mt-3 list-disc list-outside pl-6 text-slate-300 space-y-1">
+            <li><strong>B.S., Computer Science — University of Wisconsin–Whitewater (May 2021)</strong></li>
+            <li>American Foundation for Suicide Prevention — Event volunteer</li>
+            <li>Crossway Church — Event volunteer</li>
+        </ul>
+    </article>
+
+    <div class="pt-2">
+        <a class="btn-primary" href="~/files/BrettGraves.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+    </div>
+</section>
