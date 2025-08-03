@@ -4,10 +4,11 @@
 }
 <h1 class="text-3xl font-bold mb-6">Azure &amp; DevOps</h1>
 
-<div class="grid gap-6 md:grid-cols-2">
+<!-- w-full keeps the grid constrained; min-w-0 on items prevents overflow -->
+<div class="grid gap-6 md:grid-cols-2 w-full">
 
     <!-- Azure platform -->
-    <article class="rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
+    <article class="min-w-0 rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
         <h3 class="text-xl font-semibold">Azure</h3>
         <ul class="mt-3 list-disc list-outside pl-6 text-slate-300 space-y-1">
             <li>App Service hosting with <strong>deployment slots</strong> (blue/green), slot settings, and safe swaps.</li>
@@ -24,7 +25,7 @@
     </article>
 
     <!-- CI/CD -->
-    <article class="rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
+    <article class="min-w-0 rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
         <h3 class="text-xl font-semibold">CI/CD</h3>
         <ul class="mt-3 list-disc list-outside pl-6 text-slate-300 space-y-1">
             <li>GitHub Actions &amp; Azure DevOps pipelines for <strong>build → test → package → deploy</strong>.</li>
@@ -39,12 +40,12 @@
     </article>
 
     <!-- Example: Actions to App Service with slots -->
-    <article class="rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
+    <article class="min-w-0 rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
         <h3 class="text-xl font-semibold">Example: Web App deploy with slots</h3>
         <p class="mt-2 text-slate-300">
             Build/tests run, package published, deploy to <em>staging</em> slot, warm-up health check, then swap.
         </p>
-<pre class="mt-3 overflow-x-auto text-xs leading-5"><code class="language-yaml"># .github/workflows/webapp.yml
+<pre class="mt-3 overflow-x-auto w-full max-w-full text-xs leading-5"><code class="language-yaml"># .github/workflows/webapp.yml
 name: webapp
 on: { push: { branches: [ main ] } }
 
@@ -52,15 +53,15 @@ jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout&#64;v4
-    - uses: actions/setup-dotnet&#64;v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
       with: { dotnet-version: '8.0.x' }
     - run: dotnet restore
     - run: dotnet build --configuration Release --no-restore
     - run: dotnet test  --configuration Release --no-build --collect:"XPlat Code Coverage"
     - run: dotnet publish ./BrettGravesPortfolio -c Release -o out
 
-    - uses: azure/webapps-deploy&#64;v3
+    - uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
         slot-name: staging
@@ -82,12 +83,12 @@ jobs:
     </article>
 
     <!-- Example: Bicep + KV secret reference -->
-    <article class="rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
+    <article class="min-w-0 rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5">
         <h3 class="text-xl font-semibold">Example: Infra as Code (Bicep)</h3>
         <p class="mt-2 text-slate-300">
             Minimal App Service + Key Vault, with an app setting that references a secret (no secrets in code).
         </p>
-<pre class="mt-3 overflow-x-auto text-xs leading-5"><code class="language-bicep">param name string
+<pre class="mt-3 overflow-x-auto w-full max-w-full text-xs leading-5"><code class="language-bicep">param name string
 param kvName string
 param secretName string
 
@@ -106,7 +107,7 @@ resource web 'Microsoft.Web/sites@2023-12-01' = {
       appSettings: [
         {
           name: 'ConnString'
-          value: '&#64;Microsoft.KeyVault(SecretUri=https://${kvName}.vault.azure.net/secrets/${secretName})'
+          value: '@@Microsoft.KeyVault(SecretUri=https://${kvName}.vault.azure.net/secrets/${secretName})'
         }
       ]
     }
@@ -120,12 +121,12 @@ resource web 'Microsoft.Web/sites@2023-12-01' = {
     </article>
 
     <!-- Example: Observability with KQL -->
-    <article class="rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5 md:col-span-2">
+    <article class="min-w-0 rounded-2xl border border-white/10 bg-slate-900 hover:bg-sky-700 p-5 md:col-span-2">
         <h3 class="text-xl font-semibold">Example: Observability (KQL)</h3>
         <p class="mt-2 text-slate-300">
             Alert on rising server errors with a short lookback and suppression window to avoid noise.
         </p>
-<pre class="mt-3 overflow-x-auto text-xs leading-5"><code class="language-sql">// App Insights - request failure rate
+<pre class="mt-3 overflow-x-auto w-full max-w-full text-xs leading-5"><code class="language-sql">// App Insights - request failure rate
 requests
 | where timestamp &gt; ago(10m)
 | summarize total = count(), failures = countif(resultCode startswith "5")

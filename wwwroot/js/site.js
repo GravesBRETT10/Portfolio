@@ -83,3 +83,28 @@ async function sendChatPage() {
         errBox.classList.remove('hidden');
     }
 }
+// Mobile nav toggle
+(function () {
+    const btn = document.getElementById('nav-toggle');
+    const panel = document.getElementById('nav-panel');
+    if (!btn || !panel) return;
+
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
+    function toggle() {
+        const open = panel.classList.toggle('hidden') === false; // now visible?
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (iconOpen && iconClose) {
+            iconOpen.classList.toggle('hidden', open);
+            iconClose.classList.toggle('hidden', !open);
+        }
+    }
+
+    btn.addEventListener('click', toggle);
+
+    // Close when a mobile link is clicked
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        if (getComputedStyle(btn).display !== 'none' && !panel.classList.contains('hidden')) toggle();
+    }));
+})();

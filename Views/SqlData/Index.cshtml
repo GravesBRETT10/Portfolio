@@ -1,11 +1,11 @@
-
 @{
     ViewData["Title"] = "SQL & Data";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1 class="text-3xl font-bold mb-6">SQL &amp; Data</h1>
-<div class="grid md:grid-cols-2 gap-6">
-    <section class="card hover:bg-sky-700">
+
+<div class="grid md:grid-cols-2 gap-6 w-full">
+    <section class="min-w-0 card hover:bg-sky-700">
         <h3 class="card-title">Patterns</h3>
         <ul class="list-disc list-inside text-slate-300">
             <li>Parameterized queries and stored procedures</li>
@@ -13,15 +13,19 @@
             <li>ETL checks, telemetry, and validation</li>
         </ul>
     </section>
-    <section class="card hover:bg-sky-700">
+
+    <section class="min-w-0 card hover:bg-sky-700">
         <h3 class="card-title">Sample</h3>
-        <pre class="text-xs bg-slate-900 rounded-xl p-3 border border-white/10 overflow-x-auto">
+        <pre class="text-xs bg-slate-900 rounded-xl p-3 border border-white/10 overflow-x-auto w-full max-w-full">
 CREATE PROCEDURE dbo.usp_GetRecentTelemetry
-    @@Since DATETIME2
+            @@Since DATETIME2
 AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT TOP 100 * FROM dbo.Telemetry WHERE [Timestamp] &gt;= @@Since ORDER BY [Timestamp] DESC;
+    SELECT TOP 100 *
+    FROM dbo.Telemetry
+    WHERE [Timestamp] &gt;= @@Since
+    ORDER BY [Timestamp] DESC;
 END
         </pre>
     </section>
