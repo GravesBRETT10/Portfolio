@@ -22,4 +22,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Brett\source\repos\BrettGravesPortfolio\BrettGravesPortfolio\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Brett\source\repos\BrettGravesPortfolio\BrettGravesPortfolio\.editorconfig" />
+  </ItemGroup>
 </Project>
